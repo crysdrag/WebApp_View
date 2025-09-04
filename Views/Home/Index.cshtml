@@ -1,0 +1,56 @@
+﻿@model List<Product>
+
+<div class="container mt-3 pb-xxl-5">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <button id="load-data" class="card-header bg-primary text-white">
+                    Danh mục sản phẩm
+                </button>
+
+                <ul id="data-loaded" class="list-group list-group-flush"></ul>
+            </div>
+
+            <div class="card">
+                <img src="/images/banner.jpg" class="card-img-top p-4" alt="Quảng cáo" />
+            </div>
+        </div>
+
+
+
+        <div class="col-md-9">
+
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    Sản phẩm mới nhất
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-evenly">
+                        @foreach (var p in Model)
+                        {
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100">
+                                    <img src="@p.Image" class="card-img-top" alt="@p.Name" />
+                                    <div class="card-body">
+                                        <h6 class="card-title">@p.Name</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @await Component.InvokeAsync("HotProducts")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('#load-data').click(function () {
+            $('#data-loaded').load("/Home/Categories")
+        })
+    </script>
+}
